@@ -18,7 +18,7 @@ export default function Page() {
           <nav className="hidden md:flex items-center gap-7 text-sm text-cocoa-800">
             <a href="#mobile" className="hover:text-sage-700 transition">Why Mobile</a>
             <a href="#services" className="hover:text-sage-700 transition">Services</a>
-            <a href="#grooms" className="hover:text-sage-700 transition">Recent Grooms</a>
+            <a href="#about" className="hover:text-sage-700 transition">About</a>
             <a href="#contact" className="hover:text-sage-700 transition">Book</a>
           </nav>
           <a
@@ -72,11 +72,7 @@ export default function Page() {
 
           <div className="md:col-span-5 anim-settle relative" style={{ ['--anim-delay' as any]: '500ms' }}>
             <div className="photo-soft aspect-[4/5]">
-              <img
-                src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=700&q=80"
-                alt="Happy dog after grooming"
-                className="w-full h-full object-cover"
-              />
+              <CanineHero />
             </div>
 
             {/* Floating badge */}
@@ -164,40 +160,8 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── Recent Grooms ── */}
-      <section id="grooms" className="bg-oat-200/50">
-        <div className="max-w-6xl mx-auto px-6 py-20 md:py-24">
-          <div className="flex items-end justify-between flex-wrap gap-4">
-            <div>
-              <div data-reveal className="eyebrow">Recent Grooms</div>
-              <h2 data-reveal className="mt-3 font-display font-extrabold text-4xl md:text-5xl text-cocoa-900">
-                Some happy clients.
-              </h2>
-            </div>
-          </div>
-
-          <div className="mt-10 grid md:grid-cols-3 gap-6">
-            {[
-              { src: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=700&q=80', t: 'Cavalier', c: 'Spring Hill' },
-              { src: 'https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=700&q=80',  t: 'Doodle de-shed', c: 'Brooksville' },
-              { src: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=700&q=80',  t: 'First-time client', c: 'Hudson' },
-            ].map((p, i) => (
-              <figure key={p.t} data-reveal style={{ ['--reveal-delay' as any]: `${i * 120}ms` }}>
-                <div className="photo-soft aspect-[4/5]">
-                  <img src={p.src} alt={`${p.t} in ${p.c}`} className="w-full h-full object-cover" />
-                </div>
-                <figcaption className="mt-3 flex items-center justify-between text-sm">
-                  <span className="font-display font-semibold text-cocoa-900">{p.t}</span>
-                  <span className="text-cocoa-500">{p.c}</span>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── About Sabrina ── */}
-      <section className="bg-oat">
+      <section id="about" className="bg-oat">
         <div className="max-w-6xl mx-auto px-6 py-20 md:py-24 grid md:grid-cols-12 gap-12 items-center">
           <div className="md:col-span-5">
             <div data-reveal className="eyebrow">About</div>
@@ -309,12 +273,15 @@ export default function Page() {
               <li>· Homosassa</li>
             </ul>
           </div>
-          <div data-reveal className="md:col-span-7 maphatch h-72 rounded-3xl border border-cocoa-700/15 relative">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-white px-5 py-2.5 rounded-full border border-cocoa-700/15 font-display font-semibold text-cocoa-900">
-                Hernando · Citrus · Pasco · FL
-              </div>
-            </div>
+          <div data-reveal className="md:col-span-7 h-72 rounded-3xl border border-cocoa-700/15 relative overflow-hidden bg-oat-200">
+            <iframe
+              src="https://maps.google.com/maps?q=Spring+Hill,+FL&z=9&output=embed"
+              className="block w-full h-full"
+              style={{ border: 0, filter: 'saturate(0.85) contrast(0.95)' }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Custom Canines service area — Hernando, Citrus, and Pasco counties, FL"
+            />
           </div>
         </div>
       </section>
@@ -362,6 +329,111 @@ export default function Page() {
         </div>
       </footer>
     </main>
+  );
+}
+
+/**
+ * Hero illustration: a friendly dog sitting on a clean groomed pad,
+ * fresh out of a wash. Sage + oat palette, warm and personable.
+ */
+function CanineHero() {
+  return (
+    <svg
+      viewBox="0 0 400 500"
+      preserveAspectRatio="xMidYMid slice"
+      className="block w-full h-full"
+      role="img"
+      aria-label="A happy dog after a Custom Canines mobile grooming visit"
+    >
+      <defs>
+        <linearGradient id="cc-bg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"  stopColor="#A4C2AE" />
+          <stop offset="100%" stopColor="#7BA68A" />
+        </linearGradient>
+        <radialGradient id="cc-spot" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0%"  stopColor="#F7F2EA" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#F7F2EA" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
+      {/* sage gradient background */}
+      <rect width="400" height="500" fill="url(#cc-bg)" />
+
+      {/* warm spotlight */}
+      <circle cx="200" cy="280" r="180" fill="url(#cc-spot)" />
+
+      {/* soft floor shadow */}
+      <ellipse cx="200" cy="445" rx="130" ry="18" fill="#577863" opacity="0.35" />
+
+      {/* DOG BODY — golden / cream colored, sitting */}
+      {/* hindquarters */}
+      <ellipse cx="200" cy="380" rx="120" ry="80" fill="#D8C49C" />
+      {/* belly highlight */}
+      <ellipse cx="200" cy="380" rx="80" ry="55" fill="#E6D7B4" />
+
+      {/* front legs */}
+      <rect x="155" y="350" width="28" height="90" rx="14" fill="#D8C49C" />
+      <rect x="217" y="350" width="28" height="90" rx="14" fill="#D8C49C" />
+      {/* paws */}
+      <ellipse cx="169" cy="440" rx="18" ry="8" fill="#A8956E" />
+      <ellipse cx="231" cy="440" rx="18" ry="8" fill="#A8956E" />
+
+      {/* chest / front */}
+      <ellipse cx="200" cy="290" rx="75" ry="60" fill="#D8C49C" />
+      <ellipse cx="200" cy="295" rx="50" ry="38" fill="#EDDFB8" />
+
+      {/* HEAD */}
+      <ellipse cx="200" cy="200" rx="78" ry="70" fill="#D8C49C" />
+
+      {/* fluffy ears (recently groomed) */}
+      <path d="M 130 170 Q 100 175 95 220 Q 100 250 130 240 Z" fill="#C4B086" />
+      <path d="M 130 170 Q 110 195 115 235 Q 122 230 130 240" fill="#A8956E" opacity="0.4" />
+      <path d="M 270 170 Q 300 175 305 220 Q 300 250 270 240 Z" fill="#C4B086" />
+      <path d="M 270 170 Q 290 195 285 235 Q 278 230 270 240" fill="#A8956E" opacity="0.4" />
+
+      {/* SNOUT */}
+      <ellipse cx="200" cy="230" rx="42" ry="30" fill="#EDDFB8" />
+      <ellipse cx="200" cy="235" rx="36" ry="22" fill="#F5EAC8" />
+
+      {/* nose */}
+      <ellipse cx="200" cy="218" rx="9" ry="7" fill="#3A2A1F" />
+      <ellipse cx="197" cy="215" rx="2" ry="1.5" fill="#7A6552" />
+
+      {/* mouth */}
+      <path d="M 200 232 Q 198 244 188 244" stroke="#3A2A1F" strokeWidth="2" fill="none" strokeLinecap="round" />
+      <path d="M 200 232 Q 202 244 212 244" stroke="#3A2A1F" strokeWidth="2" fill="none" strokeLinecap="round" />
+      {/* small tongue */}
+      <ellipse cx="200" cy="248" rx="6" ry="3" fill="#C4754A" />
+
+      {/* EYES — black with highlights */}
+      <ellipse cx="172" cy="190" rx="7" ry="9" fill="#3A2A1F" />
+      <ellipse cx="228" cy="190" rx="7" ry="9" fill="#3A2A1F" />
+      {/* eye sparkles */}
+      <circle cx="170" cy="186" r="2.2" fill="#F7F2EA" />
+      <circle cx="226" cy="186" r="2.2" fill="#F7F2EA" />
+
+      {/* eyebrows / fur tufts */}
+      <path d="M 158 178 Q 168 174 178 178" stroke="#A8956E" strokeWidth="2" fill="none" strokeLinecap="round" />
+      <path d="M 222 178 Q 232 174 242 178" stroke="#A8956E" strokeWidth="2" fill="none" strokeLinecap="round" />
+
+      {/* fresh bandana — sage colored */}
+      <path d="M 130 270 Q 200 290 270 270 L 260 295 Q 200 310 140 295 Z" fill="#577863" />
+      <path d="M 130 270 Q 200 290 270 270 L 268 278 Q 200 297 132 278 Z" fill="#67916F" />
+      {/* bandana fold */}
+      <path d="M 268 270 L 285 290 L 270 295 Z" fill="#577863" />
+
+      {/* small sparkle elements (fresh from groom) */}
+      <g fill="#F7F2EA" opacity="0.7">
+        <path d="M 100 100 L 102 108 L 110 110 L 102 112 L 100 120 L 98 112 L 90 110 L 98 108 Z" />
+        <path d="M 320 130 L 321 134 L 325 135 L 321 136 L 320 140 L 319 136 L 315 135 L 319 134 Z" />
+        <path d="M 75 200 L 76 204 L 80 205 L 76 206 L 75 210 L 74 206 L 70 205 L 74 204 Z" />
+        <path d="M 335 350 L 336 354 L 340 355 L 336 356 L 335 360 L 334 356 L 330 355 L 334 354 Z" />
+      </g>
+
+      {/* tail peeking out */}
+      <path d="M 305 380 Q 340 350 345 320 Q 348 310 340 308" stroke="#D8C49C" strokeWidth="18" fill="none" strokeLinecap="round" />
+      <path d="M 305 380 Q 340 350 345 320 Q 348 310 340 308" stroke="#EDDFB8" strokeWidth="10" fill="none" strokeLinecap="round" opacity="0.7" />
+    </svg>
   );
 }
 
