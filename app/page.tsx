@@ -65,7 +65,7 @@ export default function Page() {
             <div className="anim-settle mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-cocoa-500"
                  style={{ ['--anim-delay' as any]: '560ms' }}>
               <Badge>100% Recommend · Facebook</Badge>
-              <Badge>5★ Rated · Scrubby</Badge>
+              <Badge>5★ Rated</Badge>
               <Badge>Locally Owned</Badge>
             </div>
           </div>
